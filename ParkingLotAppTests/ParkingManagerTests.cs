@@ -6,16 +6,51 @@ namespace ParkingLotAppTests
     public class ParkingManagerTests
     {
         [TestMethod]
-        public void ParkVehicle_Success()
+        public void ParkVehicle_Hatchback_Success(){
+            //Arrange
+            var parkingManager = new ParkingManager();
+
+            //Act
+             var lotNumber = parkingManager.ParkVehicle(VehicleType.Hatchback);
+
+            // Assert
+             Assert.IsTrue(lotNumber > 0);
+        }
+        [TestMethod]
+        public void ParkVehicle_SedanCompactSUV_Success()
         {
             // Arrange
             var parkingManager = new ParkingManager();
 
             // Act
-            var lotNumber = parkingManager.ParkVehicle(VehicleType.Hatchback);
+            var lotNumber = parkingManager.ParkVehicle(VehicleType.SedanCompactSUV);
 
             // Assert
             Assert.IsTrue(lotNumber > 0);
+        }
+        [TestMethod]
+        public void ParkVehicle_SUVOrLarge_Success()
+        {
+            // Arrange
+            var parkingManager = new ParkingManager();
+
+            // Act
+            var lotNumber = parkingManager.ParkVehicle(VehicleType.SUVOrLarge);
+
+            // Assert
+            Assert.IsTrue(lotNumber > 0);
+        }
+        [TestMethod]
+        public void ParkVehicle_SedanCompactSUV_Failure_SmallLotOnly()
+        {
+            // Arrange
+            var parkingManager = new ParkingManager();
+    
+            // Act
+            var lotNumber = parkingManager.ParkVehicle(VehicleType.SedanCompactSUV);
+    
+            // Assert
+            Assert.IsTrue(lotNumber == -1);
         }
         [TestMethod]
         public void ParkVehicle_Failure_NoAvailableLot()
@@ -27,6 +62,18 @@ namespace ParkingLotAppTests
             // Act
             var lotNumber = parkingManager.ParkVehicle(VehicleType.Hatchback);
 
+            // Assert
+            Assert.IsTrue(lotNumber == -1);
+        }
+        [TestMethod]
+        public void ParkVehicle_SUVOrLarge_Failure_LargeLotOnly()
+        {
+            // Arrange
+            var parkingManager = new ParkingManager();
+    
+            // Act
+            var lotNumber = parkingManager.ParkVehicle(VehicleType.SUVOrLarge);
+    
             // Assert
             Assert.IsTrue(lotNumber == -1);
         }
